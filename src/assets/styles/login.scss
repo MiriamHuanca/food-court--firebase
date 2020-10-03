@@ -1,0 +1,60 @@
+.bg-login {
+  background-image: url("http://mastrarquitectura.com/web/wp-content/uploads/2014/11/PATIO-DE-COMIDAS-CONDADO-SHOPPING-I-810x456.jpg");
+  background-size: cover;
+  background-attachment: scroll;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  position: relative;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(#27333e, 0.6);
+    opacity: 1;
+    z-index: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .fullscreen-md {
+    min-height: 100vh;
+  }
+}
+.display-md-3{
+  font-size: 4.5rem !important;
+}
+.zindex-1 {
+  z-index: 1;
+}
+.bold{
+  font-weight: 600;
+}
+.logo{
+  width: 180px!important;
+}
+.logo-p{
+  width: 120px!important;
+}
+
+
+.left_area_login {
+  margin-top: -10px;
+  h1 {
+    color: $color-dark;
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 900;
+  }
+
+  span {
+    color: $color-3;
+  }
+}

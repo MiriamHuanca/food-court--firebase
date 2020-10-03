@@ -1,0 +1,69 @@
+
+@import "~bootstrap/scss/_functions";
+@import "~bootstrap/scss/_variables";
+@import "~bootstrap/scss/_mixins";
+
+$font-family-template: "Poppins", sans-serif;
+$font-family-complementary: $font-family-template;
+$font-family-handwritten: "Caveat", cursive, $font-family-template;
+$font-family-awesome: "Font Awesome 5 Free";
+
+// Updated to Bootstrap 4 fix
+$grid-float-breakpoint: md;
+$grid-float-breakpoint-max: sm;
+
+// [ COLORS ]
+$color-1: #ffffff !default;
+$color-2: #5d5d5d !default; // #646f79 (o)
+$color-3: #ffd740 !default; //#7b68ee !default; //#3c1fc7 !default;
+$color-4: #2f88ce !default; //#7a39db !default;
+$color-5: #195582 !default; //#143350 !default; // #181c1f (o)
+$color-6: #b8bfc8 !default; // #ebeef3 (o)
+$color-7: #932d00 !default;
+$color-8: #3e3e3e !default; // #ebeef3 (o)
+$color-9: #A0CC49 !default;
+
+$color-light: #6db8ff !default;
+$color-dark: #002d55 !default;
+
+//variables
+$color-light-2: #3e3e3e; //#;2f88ce#7792e8
+$color-box-title: rgba(25, 85, 130, 0.7);
+
+$font-size-h2: 2.6rem;
+$font-size-h2-m2: 2rem;
+$font-size-h2-m3: 1.8rem;
+$font-size-h2-m: 1.4rem;
+
+$font-size-h3: 1.75rem;
+$font-size-h3-m2: 1.5rem;
+$font-size-h3-m1: 1.6rem;
+$font-size-h3-m: 1rem;
+
+$font-size-h4: 1.5rem;
+$font-size-h4-m2: 1.3rem;
+$font-size-h4-m1: 1.4rem;
+$font-size-h4-m: 0.85rem;
+
+$font-size-h6: 0.8rem;
+$font-size-h6-m: 0.7rem;
+
+$font-size-p: 0.9rem;
+$font-size-p-m1: 0.86rem;
+$font-size-p-m2: 0.84rem;
+$font-size-p-m: 0.75rem;
+$font-size-p-small: 90%;
+
+$font-size-font-sm: 0.75rem;
+$font-size-card: 10px;
+$font-size-span: 1rem;
+$font-size-span-m: 12.8px;
+$font-size-a: 0.7rem;
+
+$font-size-btn: 1rem;
+$font-size-btn-m1: 0.9rem;
+$font-size-btn-m: 0.65rem;
+
+$font-size-btn-map: 0.88rem;
+$font-size-btn-map-m: 0.75rem;
+

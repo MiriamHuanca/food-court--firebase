@@ -1,0 +1,151 @@
+<section class="singl-testimonial" *ngIf="restaurant">
+  <div class="container-fluid px-6 py-4">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="px-3">
+            <h3 class="color-4 mb-0">DETALLES</h3>
+            <hr class="mt-1"/>
+          </div>
+          <div class="col-md-12 pr-5 pt-0"
+               *ngIf="restaurant.descripcion">
+            <div class="text-justify"> {{restaurant?.descripcion}}</div>
+          </div>
+
+          <div class="px-3 mt-2 col-md-12 row" *ngIf="ambient.length>0">
+            <div class="col-md-6">
+              <h3 class="color-4 mb-0">AMBIENTES</h3>
+              <hr class="mt-1"/>
+            </div>
+          </div>
+
+          <div class="col-md-12 box-event mt-2 mb-4"
+               *ngFor="let data of ambient; let i = index">
+            <div class="rounded bg-1 shadow">
+              <div class="row px-3 d-flex align-items-center position-relative">
+                <div class="col-md-3 p-0 position-static">
+                  <div class="bg-5 color-1 px-3 py-4 box-day">
+                    <p class="m-0 font-weight-normal text-center">
+                      <i class="icon"
+                         [ngStyle]="{'font-size': '50px'}"
+                         [ngClass]="{ 'ion-md-checkmark': data.estado==='abierto', 'ion-md-close': data.estado==='cerrado' }"></i>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-9 px-0 py-2 mb-3 m-movil">
+                  <h4 class="text-capitalize color-5">
+                    {{ data?.nombre }}
+                  </h4>
+                  <div class="icon-t mr-2 mt-1"></div>
+                  <p class="color-2 m-0 bold pl-4">
+                    {{ restaurant?.nombre | uppercase }}
+                  </p>
+                  <p class="mb-0 font-sm-n">
+                    <i class="fas fa-map-marker-alt color-5 mr-2"></i>
+                    {{ data?.descripcion }}
+                  </p>
+                </div>
+                <div class="font-map mx-auto text-center"
+                     [ngStyle]="{display: data['stateMap'] === true ? 'none' : 'block'}">
+                  <a class="nav-link btn-primary btn-rounded"
+                     (click)="mapState(data)">
+                    <i class="fas fa-sort-down"></i> Foto de ambiente
+                  </a>
+                </div>
+              </div>
+              <app-site [dataI]="data"
+                        [foodP]="imageUrlP"
+                        [index]="i"
+                        (clickButtonD)="deleteEventAmbient($event, i)"
+                        (clickButtonE)="editEventAmbient($event, content, i, data)">
+              </app-site>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="restaurant">
+        <div class="row">
+
+          <div class="px-3">
+            <h3 class="color-4 ">MEDIA</h3>
+            <hr class="mt-1"/>
+          </div>
+
+          <div class="col-md-12 mt-4">
+            <div class="modal-image">
+              <input type="radio" id="mostrar-modal" name="modal"/>
+              <label for="mostrar-modal">
+                <div class="img-d"
+                     style="background-image: url('assets/image/t-image.jpg');"></div>
+              </label>
+              <label for="mostrar-modal">
+                <div class="img-d"
+                     style="background-image: url('assets/image/t-image.jpg');"></div>
+              </label>
+              <label for="mostrar-modal">
+                <div class="img-d"
+                     style="background-image: url('assets/image/t-image.jpg');"></div>
+              </label>
+              <label for="mostrar-modal">
+                <div class="img-d"
+                     style="background-image: url('assets/image/t-image.jpg');"></div>
+              </label>
+              <label for="mostrar-modal">
+                <div class="img-d"
+                     style="background-image: url('assets/image/t-image.jpg');"></div>
+              </label>
+              <label for="mostrar-modal">
+                <div
+                  class="img-d"
+                  style="background-image: url('assets/image/t-image.jpg');"></div>
+              </label>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{modalTitle}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="ambientForm">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text"
+               class="form-control"
+               formControlName="nombre"
+               id="nombre"
+               placeholder="Area infantil">
+        <small *ngIf="isControlHasError('nombre','required')"
+               class="form-text text-danger">El nombre es requerido.</small>
+      </div>
+      <div class="form-group">
+        <label for="descripcion">Descripcion</label>
+        <input type="text"
+               class="form-control"
+               id="descripcion"
+               formControlName="descripcion"
+               placeholder="Area recreativo de ..">
+        <small *ngIf="isControlHasError('descripcion','required')"
+               class="form-text text-danger">La descripcion es requerido.</small>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+            [disabled]="ambientForm.invalid"
+            class="btn btn-success"
+            (click)="modal.close(ambientForm.value)">Guardar
+    </button>
+  </div>
+</ng-template>

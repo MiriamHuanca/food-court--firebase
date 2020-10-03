@@ -1,0 +1,157 @@
+header {
+  position: fixed;
+  background: $color-dark;
+  padding: 20px;
+  width: 100%;
+  height: 70px;
+  z-index: 2;
+
+  .left_area {
+    margin-top: -10px;
+    h3 {
+      color: $color-1;
+      margin: 0;
+      text-transform: uppercase;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    span {
+      color: $color-3;
+    }
+  }
+
+  .right_area {
+    .logout_btn {
+      padding: 5px;
+      background: $color-3;
+      text-decoration: none;
+      float: right;
+      margin-top: -30px;
+      margin-right: 5px;
+      border-radius: 2px;
+      font-size: 15px;
+      font-weight: 600;
+      color: $color-2;
+      transition: 0.5s;
+      transition-property: background;
+
+      &:hover {
+        background: $color-9;
+      }
+    }
+  }
+}
+
+.siderbar {
+  background: $color-5;
+  margin-top: 70px;
+  padding-top: 60px;
+  position: fixed;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  transition: 0.5s;
+  transition-property: left;
+
+  .profile_image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  .email-logo {
+    color: $color-1;
+    margin-top: 0;
+    margin-bottom: 4em;
+    font-size: 14px;
+  }
+
+  a {
+    color: $color-1;
+    display: block;
+    line-height: 60px;
+    text-decoration: none;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    transition-property: background;
+
+    &:hover {
+      background: $color-4;
+      color: $color-3;
+    }
+    &:focus {
+      color: $color-3;
+    }
+  }
+  ul {
+    list-style: none;
+    li a {
+      background: $color-5;
+    }
+  }
+}
+
+label #sidebar-btn {
+  z-index: 1;
+  color: $color-1;
+  position: fixed;
+  cursor: pointer;
+  left: 240px;
+  font-size: 20px;
+  transition: 0.5s;
+  transition-property: color;
+
+  &:hover {
+    color: $color-light;
+  }
+}
+
+#check {
+  display: none;
+
+  &:checked ~ {
+    .siderbar {
+      left: -190px;
+
+      a {
+        font-size: 20px;
+        margin-left: 170px;
+        max-width: 80px;
+
+        span {
+          display: none;
+        }
+      }
+      #homeSubmenu {
+        padding-left: 10px;
+        a {
+          color: $color-9!important;
+          &:hover {
+            color: $color-light!important;
+          }
+        }
+      }
+      a[data-toggle="collapse"] {
+        padding-left: 24px;
+      }
+      .email-logo {
+        font-size: 10px;
+      }
+    }
+    .content {
+      margin-left: 70px;
+    }
+  }
+}
+
+
+.content {
+  height: 100vh;
+  margin-left: 250px;
+  padding-top: 70px;
+  transition: 0.5s;
+}

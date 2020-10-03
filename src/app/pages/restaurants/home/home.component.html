@@ -1,0 +1,270 @@
+<div class="container-fluid">
+  <p>Listado de restaurantes</p>
+  <div class="row">
+    <div class="col-8">
+      <form #searchForm="ngForm" (ngSubmit)="searchSubmit(searchForm)" class="row">
+        <div class="form-group col-6">
+          <input class="form-control mr-sm-2"
+                 type="search" placeholder="Buscar"
+                 [(ngModel)]="dataSearch"
+                 name="search">
+        </div>
+        <div class="form-group col-3">
+          <select class="form-control" name="tipo" [(ngModel)]="tipo">
+            <option [ngValue]="objeto" *ngFor="let objeto of listaTipo">{{objeto}}</option>
+          </select>
+        </div>
+
+        <div class="col-2">
+          <button class="btn btn-success mb-2" type="submit">
+            <img [src]="'../../assets/icon/search.png'" alt="V"/>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="offset-3">
+      <button class="btn btn-outline-success" (click)="openCreateR(content)">+</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12" *ngFor="let item of dataRestaurant; let i = index">
+      <div class="card card-size elevation mb-2">
+        <div class="row">
+          <div class="col-2 col-md-2 col-sm-3 my-auto">
+            <img class="responsive pl-3" [src]="item.logo" alt="Card image">
+          </div>
+          <div class="col-2 col-md-2 col-sm-4  p-0 my-auto">
+            <p class="font-weight-bold pt-3 color-5">{{item.nombre}}</p>
+            <p><span class="color-6">Movil: </span>{{item.telefono}}</p>
+            <p><span class="color-6">Correo: </span>{{item['email']}}</p>
+          </div>
+          <div class="col-4 col-md-3 col-sm-5 pt-5">
+            <p><span class="color-6">Horario de atencion: </span>{{item.horario}}</p>
+            <p><span class="color-6">Direccion: </span>{{item.direccion}}</p>
+          </div>
+          <div class="col-2 col-md-3 col-sm-6 col-sm-3 pt-md-5 pt-sm-0">
+            <p class="pl-sm-3"><span class="color-6">Tipo de comida: </span>{{item.tipoComida?.nombre}}</p>
+          </div>
+          <div class="col-2 col-md-2 col-sm-6 my-auto color-dark">
+            <a class="pointer-event" (click)="openEditR(content, item,i)">
+              <i class="icon ion-md-create px-2" [ngStyle]="{'font-size':'24px'}"></i>
+            </a>
+            <a (click)="detailRestaurant(item?.id)">
+              <i class="icon ion-md-eye px-2" [ngStyle]="{'font-size':'24px'}"></i>
+            </a>
+            <br>
+            <a (click)="openDeleteR(item, i)">
+              <i class="icon ion-md-trash px-2" [ngStyle]="{'font-size':'24px'}"></i>
+            </a>
+            <a (click)="ambientRestaurant(item?.id)">
+              <img class="img-icon mx-2" [src]="'../../assets/icon/weekend.png'" alt="V"/>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav>
+    <ul class="pagination" *ngIf="totalItems">
+      <li class="page-item" [ngClass]="{'disabled': !(page > 0)}">
+        <a class="page-link" (click)="beforeChange()" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item" *ngFor="let item of arrayPage" aria-current="page"
+          [ngClass]="{'active': page === item}">
+        <a class="page-link color-5" (click)="pageItem(item)">{{item}}<span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="page-item" [ngClass]="{'disabled': !(page < totalItems/itemsPerPage-1)}">
+        <a class="page-link" (click)="nextChange()" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{modalTitle}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="restaurantForm" class="row">
+      <div class="form-group col-md-4">
+        <label for="nombre">Nombre</label>
+        <input type="text"
+               class="form-control"
+               formControlName="nombre"
+               id="nombre"
+               maxlength="50"
+               placeholder="Restaurante Camba">
+        <small *ngIf="isControlHasError('nombre','required')"
+               class="form-text text-danger">El nombre es requerido.</small>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="descripcion">Descripcion</label>
+        <input type="text"
+               class="form-control"
+               id="descripcion"
+               formControlName="descripcion"
+               placeholder="“Tomate Café” es el lugar ideal,...">
+        <small *ngIf="isControlHasError('descripcion','required')"
+               class="form-text text-danger">La descripcion es requerido.</small>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="telefono">Telefono</label>
+        <input type="number"
+               class="form-control"
+               id="telefono"
+               maxlength="15"
+               formControlName="telefono"
+               placeholder="72345912">
+        <small *ngIf="isControlHasError('telefono','required')"
+               class="form-text text-danger">El telefono es requerido.</small>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="estado">Estado</label>
+        <select class="form-control"
+                id="estado"
+                formControlName="estado">
+          <option [ngValue]="objeto.estado" *ngFor="let objeto of listaEstado">{{objeto.estado | titlecase}}</option>
+        </select>
+        <small *ngIf="isControlHasError('estado','required')"
+               class="form-text text-danger">El estado es requerido.</small>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="direccion">Direccion</label>
+        <input type="text"
+               class="form-control"
+               id="direccion"
+               formControlName="direccion"
+               placeholder="Av. Camacho Esquina Bueno,...">
+        <small *ngIf="isControlHasError('direccion','required')"
+               class="form-text text-danger">La direccion es requerida.</small>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="horario">Horario</label>
+        <input type="text"
+               class="form-control"
+               id="horario"
+               formControlName="horario"
+               placeholder="Lunes a viernes de: 07:30 a 21:00">
+        <small *ngIf="isControlHasError('horario','required')"
+               class="form-text text-danger">El horario es requerido.</small>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div class="form-group col-md-12 col-sm-6">
+          <label for="idTipoComida">Comidas</label>
+          <select class="form-control"
+                  id="idTipoComida"
+                  formControlName="idTipoComida">
+            <option [ngValue]="objeto.id" *ngFor="let objeto of listaFoods">{{objeto.nombre | titlecase}}</option>
+          </select>
+          <small *ngIf="isControlHasError('idTipoComida','required')"
+                 class="form-text text-danger">La comida es requerida.</small>
+        </div>
+        <div class="form-group col-md-12 col-sm-6">
+          <label for="restauranteAmbientes">Ambientes</label>
+          <select class="form-control"
+                  id="restauranteAmbientes"
+                  formControlName="restauranteAmbientes" multiple>
+            <option [ngValue]="objeto.id" *ngFor="let objeto of listaAmbients">{{objeto.nombre | titlecase}}</option>
+          </select>
+          <small *ngIf="isControlHasError('estado','required')"
+                 class="form-text text-danger">El ambiente es requerido.</small>
+        </div>
+        <div class="form-group col-md-12 col-sm-12">
+          <img [src]="imgAsync | async" alt="" class="logo-m">
+          <button class="btn btn-primary my-2 mx-1" (click)="changeImage(imageContent)">Editar logo</button>
+          <small *ngIf="imagenUrl===null"
+                 class="form-text text-danger">El logo es requerido.</small>
+        </div>
+      </div>
+      <div class="col-md-8 row pr-0">
+        <div class="form-group col-md-6">
+          <label for="latitud">Latitud</label>
+          <input type="text"
+                 class="form-control"
+                 id="latitud"
+                 formControlName="latitud"
+                 placeholder="23432.234">
+          <small *ngIf="isControlHasError('latitud','required')"
+                 class="form-text text-danger">La latitud es requerida.</small>
+        </div>
+        <div class="form-group col-md-6 pr-0">
+          <label for="longitud">Longitud</label>
+          <input type="text"
+                 class="form-control"
+                 id="longitud"
+                 formControlName="longitud"
+                 placeholder="A234.234">
+          <small *ngIf="isControlHasError('lontitud','required')"
+                 class="form-text text-danger">La longitud es requerida.</small>
+        </div>
+
+        <div class="form-group col-md-12">
+          <agm-map
+            [latitude]="restaurantForm.value.latitud"
+            [longitude]="restaurantForm.value.longitud"
+            [zoom]="zoom"
+            [disableDefaultUI]="false"
+            [zoomControl]="false"
+            (mapClick)="mapClicked($event)">
+
+            <agm-marker
+              *ngFor="let m of markers; let i = index"
+              [latitude]="m.lat"
+              [longitude]="m.lng"
+              [label]="m.label"
+              [markerDraggable]="m.draggable"
+              (dragEnd)="markerDragEnd($event)">
+            </agm-marker>
+          </agm-map>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button"
+            [disabled]="restaurantForm.invalid && imagenUrl!==null"
+            class="btn btn-success"
+            (click)="modal.close(restaurantForm.value)">Guardar
+    </button>
+  </div>
+</ng-template>
+
+
+<ng-template #imageContent let-modal3>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic">Cargar una imagen</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal3.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #imageForm="ngForm">
+      <div class="form-group">
+        <label for="logoImagen" class="custom-file text-center">
+          <input type="file"
+                 class="form-control"
+                 id="logoImagen"
+                 ngModel
+                 name="logoImagen"
+                 (change)="handleImage($event)">
+          <i class="icon ion-md-archive mx-2"></i><span>Escoge una imagen</span>
+        </label>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+            class="btn btn-primary"
+            (click)="modal3.close(imageForm.value)">Guardar
+    </button>
+  </div>
+</ng-template>

@@ -1,0 +1,57 @@
+<input type="checkbox" id="check">
+<header>
+  <label for="check" class="d-block"><i class="icon ion-md-menu" id="sidebar-btn" [ngStyle]="{'font-size':'24px'}"></i></label>
+  <div class="left_area">
+    <h3>Plaza <span>Comidas</span></h3>
+  </div>
+  <div class="right_area">
+    <a class="logout_btn" (click)="onLogout()">Salir</a>
+  </div>
+</header>
+<div class="siderbar">
+  <ul class="list-unstyled components">
+    <div class="text-center">
+      <img src="assets/image/foto.jpg" class="profile_image">
+      <h4 class="email-logo">{{emailUser}}</h4>
+    </div>
+    <li>
+      <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="icon ion-md-home mr-2" [ngStyle]="{'font-size':'24px'}"></i>
+        <span>Restaurantes</span>
+      </a>
+      <ul class="collapse list-unstyle" id="homeSubmenu">
+        <li>
+          <a href="javascript:void(0)" routerLink="restaurants">
+            <i class="icon ion-md-bonfire mr-2"></i><span>Restaurantes</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" routerLink="ambients">
+            <i class="icon ion-md-apps mr-2"></i><span>Ambientes</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" routerLink="foods">
+            <i class="icon ion-md-image mr-2"></i><span>Comidas</span>
+          </a>
+        </li>
+      </ul>
+      <a href="javascript:void(0)" routerLink="bookings">
+        <i class="icon ion-md-bookmarks mr-2" [ngStyle]="{'font-size':'24px'}"></i>
+        <span>Reservas</span>
+      </a>
+      <a href="javascript:void(0)" routerLink="customers">
+        <i class="icon ion-md-people mr-2" [ngStyle]="{'font-size':'24px'}"></i>
+        <span>Clientes</span>
+      </a>
+      <a href="javascript:void(0)" routerLink="users">
+        <i class="icon ion-md-person mr-2" [ngStyle]="{'font-size':'24px'}"></i>
+        <span>Usuarios</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

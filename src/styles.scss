@@ -1,0 +1,29 @@
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+@import "./assets/styles/theme";
+@import "./assets/styles/session";
+@import "./assets/styles/login";
+@import "./assets/styles/sidebar";
+@import "./assets/styles/restaurants";
+
+html, body {
+  height: 100%;
+  font-family: $font-family-template;
+}
+
+body {
+  margin: 0;
+}
+
+p {
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1.7em;
+}
+
+a, a:hover, a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+}

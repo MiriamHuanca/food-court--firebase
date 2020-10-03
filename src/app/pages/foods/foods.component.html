@@ -1,0 +1,153 @@
+<div class="container-fluid">
+  <p>Listado de comidas</p>
+  <div class="row">
+    <div class="col-8">
+      <form #searchForm="ngForm" (ngSubmit)="searchSubmit(searchForm)" class="row">
+        <div class="form-group col-6">
+          <input class="form-control mr-sm-2"
+                 type="search" placeholder="Buscar"
+                 [(ngModel)]="dataSearch"
+                 name="search">
+        </div>
+
+        <div class="col-2">
+          <button class="btn btn-success mb-2" type="submit">
+            <img [src]="'../../assets/icon/search.png'" alt="V"/>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="offset-3">
+      <button class="btn btn-outline-success" (click)="openCreateR(content)">+</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12" *ngFor="let item of dataFood; let i = index">
+      <div class="card card-size elevation mb-2">
+        <div class="row">
+          <div class="col-2 col-md-2 col-sm-3 my-auto">
+            <img class="responsive pl-3" [src]="'https://images-gmi-pmc.edge-generalmills.com/6c9c3378-79e4-4d1f-bbce-828b9a6f39bf.jpg'" alt="Card image">
+          </div>
+          <div class="col-2 col-md-5 col-sm-6  p-0 my-auto">
+            <p class="font-weight-bold pt-2 color-5">{{item.nombre}}</p>
+            <p><span class="color-6">Descripcion: </span>{{item.descripcion}}</p>
+          </div>
+
+          <div class="col-2 col-md-3 col-sm-6 col-sm-12 pt-md-5 pt-sm-0">
+            <p><span class="color-6">Horario de atencion: </span>{{item.horario}}</p>
+          </div>
+          <div class="col-2 col-md-2 col-sm-6 my-auto color-dark">
+            <a class="pointer-event" (click)="openEditR(content, item,i)">
+              <i class="icon ion-md-create px-2" [ngStyle]="{'font-size':'24px'}"></i>
+            </a>
+            <a (click)="openDeleteR(item, i)">
+              <i class="icon ion-md-trash px-2" [ngStyle]="{'font-size':'24px'}"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav>
+    <ul class="pagination" *ngIf="totalItems">
+      <li class="page-item" [ngClass]="{'disabled': !(page > 0)}">
+        <a class="page-link" (click)="beforeChange()" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item" *ngFor="let item of arrayPage" aria-current="page"
+          [ngClass]="{'active': page === item}">
+        <a class="page-link color-5" (click)="pageItem(item)">{{item}}<span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="page-item" [ngClass]="{'disabled': !(page < totalItems/itemsPerPage-1)}">
+        <a class="page-link" (click)="nextChange()" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{modalTitle}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="foodForm" class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group col-md-12 col-sm-12">
+          <label for="nombre">Nombre</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="nombre"
+                 id="nombre"
+                 placeholder="Pollo Camba">
+          <small *ngIf="isControlHasError('nombre','required')"
+                 class="form-text text-danger">El nombre es requerido.</small>
+        </div>
+        <div class="form-group col-md-12 col-sm-12">
+          <label for="descripcion">Descripcion</label>
+          <input type="text"
+                 class="form-control"
+                 id="descripcion"
+                 formControlName="descripcion"
+                 placeholder="“Pollo frito” es una deli...">
+          <small *ngIf="isControlHasError('descripcion','required')"
+                 class="form-text text-danger">La descripcion es requerido.</small>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group col-md-12 col-sm-12">
+          <img [src]="imgAsync | async" alt="" class="logo-m">
+          <button class="btn btn-primary my-2 mx-1" (click)="changeImage(imageContent)">Editar imagen</button>
+          <small *ngIf="imagenUrl===null"
+                 class="form-text text-danger">El logo es requerido.</small>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button"
+            [disabled]="foodForm.invalid"
+            class="btn btn-success"
+            (click)="modal.close(foodForm.value)">Guardar
+    </button>
+  </div>
+</ng-template>
+
+
+<ng-template #imageContent let-modal3>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic">Cargar una imagen</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal3.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #imageForm="ngForm">
+      <div class="form-group">
+        <label for="logoImagen" class="custom-file text-center">
+          <input type="file"
+                 class="form-control"
+                 id="logoImagen"
+                 ngModel
+                 name="logoImagen"
+                 (change)="handleImage($event)">
+          <i class="icon ion-md-archive mx-2"></i><span>Escoge una imagen</span>
+        </label>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+            class="btn btn-primary"
+            [disabled]="imageForm.invalid"
+            (click)="modal3.close(imageForm.value)">Guardar
+    </button>
+  </div>
+</ng-template>

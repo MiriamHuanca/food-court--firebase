@@ -1,0 +1,349 @@
+.color-1 {
+  color: $color-1!important;
+}
+.color-2 {
+  color: $color-2!important;
+}
+.color-3 {
+  color: $color-3!important;
+}
+.color-4 {
+  color: $color-4!important;
+}
+.color-5 {
+  color: $color-5!important;
+}
+.color-6 {
+  color: $color-6!important;
+}
+.color-7 {
+  color: $color-7!important;
+}
+.color-8 {
+  color: $color-8!important;
+}
+.color-9 {
+  color: $color-9!important;
+}
+.color-dark {
+  color: $color-dark!important;
+}
+
+.bg-1 {
+  background-color: #ffffff !important;
+}
+.bg-5 {
+  background-color: #195582 !important;
+}
+.bg-dark {
+  background: $color-dark!important;
+}.logo-2{
+  width: 60%;
+}
+.img-circle {
+  border-radius: 50%;
+  width: 40px;
+}
+.badge-l {
+  position: relative;
+  bottom: 16px;
+  right: 10px;
+}
+.card-size {
+  font-size: x-small;
+  box-shadow: 0 5px 5px -3px rgba(0,0,0,.05), 0 8px 10px 1px rgba(0,0,0,.05), 0 3px 14px 2px rgba(0,0,0,.05);
+}
+
+.responsive{
+  width: 100%!important;
+}
+.heigth-nav {
+  min-height: 100%;
+}
+.img-icon {
+  margin-bottom: 11px;
+  width: 24px;
+}
+
+.bg-impact {
+  width: 100%;
+}
+.bg-impact-f {
+  width: 100%;
+  height: 300px;
+}
+.box-title {
+  margin: auto 0;
+  width: 28%;
+  background-color: rgba(25, 85, 130, 0.7);
+  font-weight: 300 !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 180px;
+}
+
+.box-event {
+  .box-day {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 22%;
+  }
+
+  .icon-t {
+    background-image: url(../../assets/icon/notifications.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+  }
+}
+
+.m-top-f {
+  margin-top: 5.2rem;
+}
+@media only screen and (max-device-width: 480px) and (min-device-width: 320px){
+  .main-event-detail .box-event .col-md-6 {
+    padding-top: 4.5rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  .div-map .m-movil {
+    margin-bottom: 0 !important;
+  }
+
+}
+
+@media (max-width: 768px){
+  .box-event .col-md-6 {
+    padding-top: 4.5rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+hr {
+  border-top: 1px solid #ffd740!important;
+}
+.shadow {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+.position-static {
+  position: static !important;
+}
+.fa-map-marker-alt:before {
+  content: "";
+}
+.div-map .font-map {
+  margin-bottom: -18px;
+}
+.div-map .font-map a i {
+  font-size: 1.6rem !important;
+  position: absolute;
+  bottom: 10px;
+  left: 46px;
+}
+.btn-rounded {
+  border-radius: 10rem;
+}
+
+.app-map {
+  .navbar-nav {
+    flex-direction: row;
+  }
+  .box-day {
+    height: auto;
+    background: $color-1!important;
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+  }
+}
+.map-a {
+  color: #000 !important;
+  font-size: 16px !important;
+  padding: 10px 0 !important;
+  &:active,
+  &:hover,
+  &:focus,
+  &:hover {
+    color: $color-5 !important;
+  }
+}
+.border-map {
+  padding-top: 1rem;
+  border-top: white 1px solid;
+}
+
+@media (max-width: 768px) {
+  .app-map {
+    .navbar-nav {
+      flex-direction: row;
+    }
+    .box-day {
+      height: auto;
+      background: $color-1!important;
+      padding-top: 0!important;
+      padding-bottom: 0!important;
+    }
+    .map-a {
+      color: #000 !important;
+      font-size: 16px !important;
+      padding: 10px 0 !important;
+    }
+  }
+}
+
+@media only screen and (max-device-width: 480px) and (min-device-width: 320px) {
+  .box-event .box-day {
+    position: absolute;
+    top: 0;
+    bottom: auto;
+    width: 91%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 86px;
+    padding: 1rem !important;
+  }
+}
+
+.movil-map {
+  .mapView {
+    width:100%;
+    height:300px;
+    display: block;
+  }
+  .mapViewH {
+    width:0px;
+    height:0px;
+    display: none;
+  }
+}
+
+agm-map {
+  height: 350px;
+}
+
+
+.modal-image {
+  flex-wrap: wrap;
+  width: 100%;
+  margin: auto;
+  #modal {
+    background: rgba(#000, 0.7);
+    color: #fff;
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transition: all 0.5s;
+    z-index: 33333;
+    .img-m {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      text-align: center;
+      width: 80%;
+      height: 571px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+    p {
+      width: 60%;
+      height: 40%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      font-size: 1.5em;
+      text-align: center;
+    }
+  }
+
+  #mostrar-modal {
+    display: none;
+    &:checked {
+      & ~ #modal {
+        top: 0;
+      }
+      & ~ #cerrar-modal + label {
+        display: block;
+      }
+    }
+  }
+
+  #cerrar-modal {
+    display: none;
+    + label {
+      position: fixed;
+      top: 18%;
+      right: 9%;
+      z-index: 333333;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      background: $color-4;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+      border-radius: 50%;
+      display: none;
+      transition: all 0.5s;
+    }
+    &:checked {
+      & ~ #modal {
+        top: -100vh;
+      }
+      & + label {
+        display: none;
+      }
+    }
+  }
+  label {
+    margin: 0px 2px;
+    cursor: pointer;
+    width: 32%;
+  }
+  .img-d {
+    width: 100%;
+    height: 140px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+.logo-m {
+  width: 100%;
+}
+/*Home*/
+input[type='file'] {
+  display: none;
+}
+input.mat-button {
+  width: 100%;
+  background: $color-dark;
+  &:hover{
+    background: $color-5;
+  }
+}
+.custom-file {
+  border: 1px solid $color-9;
+  display: inline-block;
+  padding: 6px 0;
+  cursor: pointer;
+  width: 100%;
+  color: $color-dark;
+  &:hover {
+    background: $color-9;
+  }
+}

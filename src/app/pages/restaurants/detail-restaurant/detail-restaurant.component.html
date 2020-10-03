@@ -1,0 +1,191 @@
+<section class="singl-testimonial" *ngIf="restaurant">
+  <div class="container-fluid p-0">
+    <div class="row mx-auto">
+      <div class="col-md-12 p-0">
+        <div>
+          <img class="bg-impact"
+               [src]="'../assets/image/restaurantImage.jpg'"/>
+          <div class="box-title d-flex align-items-center px-4 py-5 color-1">
+            <div>
+              <h4 class="mb-0">{{ restaurant?.nombre }}</h4>
+              <h6 class="mb-0">{{ restaurant?.direccion }}, Bolivia</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid px-6 py-4">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="px-3">
+            <h3 class="color-4 mb-0">DETALLES</h3>
+            <hr class="mt-1"/>
+          </div>
+          <div class="col-md-12 pr-5 pt-0"
+               *ngIf="restaurant.descripcion">
+            <div class="text-justify"> {{restaurant?.descripcion}}</div>
+          </div>
+
+          <div class="px-3 mt-2 col-md-12 row">
+            <div class="col-md-6">
+              <h3 class="color-4 mb-0">COMIDAS</h3>
+              <hr class="mt-1"/>
+            </div>
+          </div>
+
+          <div class="col-md-12 box-event mt-2 mb-4">
+            <div class="rounded bg-1 shadow">
+              <div class="row px-3 d-flex align-items-center position-relative">
+                <div class="col-md-3 p-0 position-static">
+                  <div class="bg-5 color-1 px-3 py-4 box-day">
+                    <h4 class="text-capitalize">{{ 'Octubre' }}</h4>
+                    <p class="m-0 font-weight-normal">
+                      <i class="fas fa-calendar-day mr-2"></i>
+                       Miercoles | 05:30
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-6 px-0 py-2 mb-3 m-movil">
+                  <h4 class="text-capitalize color-5">
+                    {{ food?.nombre }}
+                  </h4>
+                  <div class="icon-t mr-2 mt-1"></div>
+                  <p class="color-2 m-0 bold pl-4">
+                    {{ restaurant?.nombre | uppercase }}
+                  </p>
+                  <p class="mb-0 font-sm-n text-justify">
+                    {{ food?.descripcion }}
+                  </p>
+                </div>
+                <div class="col-md-3 px-3 py-2 text-right box-m-3">
+                  <p class="color-5 mb-0">
+                    Desde
+                    <span class="bold font-md">Bs. {{ 50 | number: '1.2'}}</span>
+                  </p>
+                </div>
+                <div class="font-map mx-auto text-center"
+                     [ngStyle]="{display: food['stateMap'] === true ? 'none' : 'block'}">
+                  <a class="nav-link btn-primary btn-rounded"
+                     (click)="mapState(food)">
+                    <i class="fas fa-sort-down"></i> Foto
+                  </a>
+                </div>
+              </div>
+
+              <app-food [dataI]="food"
+                       [foodP]="imageUrlP"
+                       [index]="1"
+                        (clickButtonD)="deleteEventFood($event)"
+                        (clickButtonE)="editEventFood($event, content, food)">
+              </app-food>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="restaurant.longitud && restaurant.latitud">
+        <div class="row">
+
+          <div class="px-3">
+            <h3 class="color-4 mb-0">UBICACION</h3>
+            <hr class="mt-1"/>
+          </div>
+
+          <div class="col-md-12 mt-4" *ngIf="restaurant.latitud && restaurant.longitud">
+            <agm-map
+              [latitude]="restaurant.latitud"
+              [longitude]="restaurant.longitud"
+              [zoom]="18"
+              [disableDefaultUI]="false">
+              <agm-marker [latitude]="restaurant.latitud" [longitude]="restaurant.longitud">
+                <agm-info-window>
+                  <strong>Ubicacion del Restaurante</strong>
+                </agm-info-window>
+              </agm-marker>
+            </agm-map>
+          </div>
+
+          <div class="px-3">
+            <h3 class="color-4 my-3">MEDIA</h3>
+            <hr class="mt-1"/>
+          </div>
+
+          <div class="col-md-12 mt-4" *ngIf="restaurant.logo">
+            <div class="modal-image">
+              <input type="radio" id="mostrar-modal" name="modal"/>
+              <label for="mostrar-modal">
+                <div class="img-d"
+                     style="background-image: url('assets/image/t-image.jpg');"></div>
+              </label>
+              <label for="mostrar-modal">
+                <div class="img-d"
+                     style="background-image: url('assets/image/t-image.jpg');"></div>
+              </label>
+              <label for="mostrar-modal">
+                <div class="img-d"
+                     style="background-image: url('assets/image/t-image.jpg');"></div>
+              </label>
+              <label for="mostrar-modal">
+                <div class="img-d"
+                     style="background-image: url('assets/image/t-image.jpg');"></div>
+              </label>
+              <label for="mostrar-modal">
+                <div class="img-d"
+                     style="background-image: url('assets/image/t-image.jpg');"></div>
+              </label>
+              <label for="mostrar-modal">
+                <div
+                  class="img-d"
+                  style="background-image: url('assets/image/t-image.jpg');"></div>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{modalTitle}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="foodForm">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text"
+               class="form-control"
+               formControlName="nombre"
+               id="nombre"
+               placeholder="Pollo Camba">
+        <small *ngIf="isControlHasError('nombre','required')"
+               class="form-text text-danger">El nombre es requerido.</small>
+      </div>
+      <div class="form-group">
+        <label for="descripcion">Descripcion</label>
+        <input type="text"
+               class="form-control"
+               id="descripcion"
+               formControlName="descripcion"
+               placeholder="“Pollo frito” es una deli...">
+        <small *ngIf="isControlHasError('descripcion','required')"
+               class="form-text text-danger">La descripcion es requerido.</small>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+            [disabled]="foodForm.invalid"
+            class="btn btn-success"
+            (click)="modal.close(foodForm.value)">Guardar
+    </button>
+  </div>
+</ng-template>
